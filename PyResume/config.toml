@@ -1,0 +1,34 @@
+[document]
+    [document.page]
+    margin = 20
+    line_end = 190
+
+    [document.cells]
+        [document.cells.standard]
+        w = 0
+        align = 'L'
+        ln = 1
+        [document.cells.left]
+        w = 0
+        align = 'L'
+        ln = 0
+        [document.cells.right]
+        w = 0
+        align = 'R'
+        ln = 1
+
+    [document.styles]
+        family = 'Times'
+
+        [document.styles.name]
+        style = 'B'
+        size = 28
+        [document.styles.title]
+        style = 'B'
+        size = 28
+        [document.styles.emphasis]
+        style = 'B'
+        size = 28
+        [document.styles.body]
+        style = 'B'
+        size = 28
