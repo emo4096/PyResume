@@ -1,6 +1,7 @@
-from resume import Resume
+from config import Resume
+import tomllib
 
-PERSON = {"name": "Shaquille O'Neal",
+PERSON = {"name": "Shaq O'Neal",
           "location": "Los Angeles, CA",
           "phone": "(123) - 456 - 7890",
           "email": "diesel@shaqattack.com"}
@@ -34,7 +35,11 @@ SKILLS = ('- Excel\n'
           '- Drone piloting\n'
           '- Underwater basket weaving')
 
-document = Resume()
+with open("config.toml", "rb") as f:
+    config = tomllib.load(f)
+
+
+document = Resume(config)
 
 document.write_name(PERSON)
 document.write_contact(PERSON)

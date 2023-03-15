@@ -1,4 +1,4 @@
-[document]
+
     [document.page]
     margin = 20
     line_end = 190
@@ -16,19 +16,25 @@
         w = 0
         align = 'R'
         ln = 1
+        [document.cells.multi]
+        w = 0
+        align = 'L'
 
     [document.styles]
-        family = 'Times'
 
         [document.styles.name]
+        family = 'Times'
         style = 'B'
         size = 28
         [document.styles.title]
+        family = 'Times'
         style = 'B'
-        size = 28
+        size = 18
         [document.styles.emphasis]
+        family = 'Times'
         style = 'B'
-        size = 28
+        size = 12
         [document.styles.body]
-        style = 'B'
-        size = 28
+        family = 'Times'
+        style = ''
+        size = 12
