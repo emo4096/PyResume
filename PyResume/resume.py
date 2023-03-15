@@ -1,45 +1,15 @@
 from fpdf import FPDF
+
+from configuration import DocumentConfig
 from fortmatting import get_contact_info
-
-MARGIN = 20
-
-LINE_END = 190
-
-BORDER = 0
-
-CELL_ARGS = {'w': 0,
-             'border': BORDER,
-             'align': 'L'}
-
-LEFT_COLUMN_CELL_ARGS = {'w': 120,
-                         'border': BORDER,
-                         'align': 'L'}
-
-RIGHT_COLUMN_CELL_ARGS = {'w': 50,
-                          'border': BORDER,
-                          'align': 'R'}
-
-NAME_STYLE = {'family': 'Times',
-              'style': 'B',
-              'size': 28}
-
-BODY_STYLE = {'family': 'Times',
-              'style': '',
-              'size': 12}
-
-TITLE_STYLE = {'family': 'Times',
-               'style': 'B',
-               'size': 18}
-
-EMPHASIS_STYLE = {'family': 'Times',
-                  'style': 'B',
-                  'size': 12}
 
 
 class Resume(FPDF):
-    def __init__(self):
+    def __init__(self, config: DocumentConfig):
         super().__init__()
-        self.set_margins(MARGIN, MARGIN, MARGIN)
+        self.config = config
+        self.set_margins(self.config.get_margin('margin'), self.config.get_margin('margin'),
+                         self.config.get_margin('margin'))
         self.add_page()
 
     def jump_y(self, distance: float):
@@ -50,34 +20,34 @@ class Resume(FPDF):
 
     def divider_line(self):
         self.jump_y(1)
-        self.line(20, self.get_y(), LINE_END, self.get_y())
+        self.line(20, self.get_y(), self.config.get_margin('line_end'), self.get_y())
         self.jump_y(1)
 
     def write_name(self, person: dict):
-        self.set_font(**NAME_STYLE)
-        self.cell(h=14, txt=person['name'], ln=1, **CELL_ARGS)
+        self.set_font(**self.config.get_style('name'))
+        self.cell(h=14, txt=person['name'], **self.config.get_cell('standard'))
 
     def write_contact(self, person: dict):
-        self.set_font(**BODY_STYLE)
-        self.cell(h=8, txt=get_contact_info(person), ln=1, **CELL_ARGS)
+        self.set_font(**self.config.get_style('body'))
+        self.cell(h=8, txt=get_contact_info(person), **self.config.get_cell('standard'))
 
     def write_section_title(self, title: str):
-        self.set_font(**TITLE_STYLE)
-        self.cell(h=8, txt=title, ln=1, **CELL_ARGS)
+        self.set_font(**self.config.get_style('title'))
+        self.cell(h=8, txt=title, **self.config.get_cell('standard'))
         self.divider_line()
 
     def write_body(self, text: str):
-        self.set_font(**BODY_STYLE)
-        self.multi_cell(h=6, txt=text, **CELL_ARGS)
+        self.set_font(**self.config.get_style('body'))
+        self.multi_cell(h=6, txt=text, **self.config.get_cell('multi'))
 
     def write_two_column_body(self, info: dict):
-        self.set_font(**EMPHASIS_STYLE)
-        self.cell(h=6, txt=info['name'], ln=0, **LEFT_COLUMN_CELL_ARGS)
-        self.cell(h=6, txt=info['years'], ln=1, **RIGHT_COLUMN_CELL_ARGS)
-        self.set_font(**BODY_STYLE)
-        self.multi_cell(h=6, txt=f'{info["accomplishment"]}', **CELL_ARGS)
+        self.set_font(**self.config.get_style('emphasis'))
+        self.cell(h=6, txt=info['name'], **self.config.get_cell('left'))
+        self.cell(h=6, txt=info['years'], **self.config.get_cell('right'))
+        self.set_font(**self.config.get_style('body'))
+        self.multi_cell(h=6, txt=f'{info["accomplishment"]}', **self.config.get_cell('multi'))
         self.jump_y(4)
 
     def write_list_body(self, string: str):
-        self.set_font(**BODY_STYLE)
-        self.multi_cell(h=8, txt=f'{string}', **CELL_ARGS)
+        self.set_font(**self.config.get_style('body'))
+        self.multi_cell(h=8, txt=f'{string}', **self.config.get_cell('multi'))

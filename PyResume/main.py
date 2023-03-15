@@ -1,4 +1,4 @@
-from config_test import Resume
+from resume import Resume
 from configuration import DocumentConfig
 
 PERSON = {"name": "Shaquille O'Neal",
