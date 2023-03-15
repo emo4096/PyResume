@@ -1,7 +1,7 @@
-from config import Resume
-import tomllib
+from config_test import Resume
+from configuration import DocumentConfig
 
-PERSON = {"name": "Shaq O'Neal",
+PERSON = {"name": "Shaquille O'Neal",
           "location": "Los Angeles, CA",
           "phone": "(123) - 456 - 7890",
           "email": "diesel@shaqattack.com"}
@@ -19,7 +19,7 @@ EDUCATION = [{'name': 'Louisiana State University',
 EXPERIENCE = [{'name': 'Self-employed - Recording Artist',
                'accomplishment': '- Released numerous studio albums.\n'
                                  '- Performed multiple worldwide tours.\n'
-                                 '- Possibly the top baketball playing rapper of all time.',
+                                 '- Possibly the top basketball playing rapper of all time.',
                'years': '1993 - Present'},
 
               {'name': 'Orlando Magic - NBA Center',
@@ -35,9 +35,7 @@ SKILLS = ('- Excel\n'
           '- Drone piloting\n'
           '- Underwater basket weaving')
 
-with open("config.toml", "rb") as f:
-    config = tomllib.load(f)
-
+config = DocumentConfig('config.toml')
 
 document = Resume(config)
 

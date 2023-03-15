@@ -1,5 +1,5 @@
-
-    [document.page]
+[document]
+    [document.margins]
     margin = 20
     line_end = 190
 
