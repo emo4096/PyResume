@@ -21,7 +21,6 @@
         align = 'L'
 
     [document.styles]
-
         [document.styles.name]
         family = 'Times'
         style = 'B'
