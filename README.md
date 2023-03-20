@@ -2,7 +2,7 @@
 
 This project is a rudimentary attempt at creating an automated Resume generator in python.<br>
 
-It is in a very early stage and has major refactoring to do.<br>
+It's in a very early stage. I am considering restarting this project in another language so it may end up abandoned.
 
 ### Dependencies
 
